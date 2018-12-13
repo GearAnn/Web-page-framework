@@ -1,0 +1,30 @@
+
+
+Django基本工作流程：
+
+1.用户通过浏览器输入URL（IP/端口号）进入，服务器的Django框架；
+2.Django框架拿到路径进行函数匹配（函数映射），匹配到的视图函数写在'View'中；
+3.视图函数（resquest请求所对应的视图函数）处理客户信息，通过'HTTPRESPONSE'（Return HTTPresponse）返回给客户浏览器；
+4.客户浏览器接收响应(response），然后进行渲染，就可以看到页面信息。
+
+
+
+4步流程中会涉及到的内容：
+
+1.在模版（template）中写html文档；
+2.html文档中若需要函数运算，然后在页面中显示后端运算的结果，则需要用到模版语言；  # 例如，{{  }}  {%  %}
+3.信息的保存，还涉及到数据库——数据的提取/保存，涉及'Module'的运用；
+4.rander的主要作用：就是把浏览器无法识别的代码渲染成可以识别的；比如，模版语言。
+5.rander如何渲染：rander先在html中发现解析模版语言，根据别名在urls中匹配到别名找到指定的视图函数的路径，然后替换掉最初读取的html中的模版语言；
+6.urls的解耦分发，在全局urls把大量的url进行分组；涉及，include()；
+7.http request请求:HttpRequest对象；http response响应：HttpResponse对象；
+8.request封装的信息：POST,GET,path,COOKIES,FILES,user,session，都可以直接面向对象调用。例如，request.POST ;
+9.每一个view请求处理方法必须返回一个httpResponse对象，也就是前端浏览器的内容
+10.
+11.HttpResponse对象：
+   页面渲染：render()，render_to_response(); rander('request',locals)可以直接把函数中所有的变量传给模版
+   页面跳转：redirect； redirect('http://www.baidu.com')
+
+
+
+

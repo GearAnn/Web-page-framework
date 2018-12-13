@@ -1,0 +1,102 @@
+
+
+模版语言:就是html+逻辑控制语句。
+
+语法：
+1.{{变量}}  # 就是在传入html文件一个Python运行后的值
+
+2.万能的点号'.' , 通过'.' 可以拿对象所以的属性内容，例如：
+  {{obj.2}}      # 表示拿模版的第二个值；
+  {{obj.属性名}}  # 表示用'.'可以拿对象所有的属性
+
+3.{% if Ture/False%},{% elif %},{% endif %}  # 可以在html中引入判断
+
+4.{% for i in list %}
+        <p>{{ i }}</p>  # 拿对象中的值
+  {% endfor %}
+
+5.{% for i in list %}
+        <p>{{ forloop.counter }}:{{ i }}</p>  # 拿索引(序号)和值
+  {% endfor %}
+
+6.{{obj|upper/lower/capfirst}}  # 返回：对象字体/首字母大小写
+
+7.{{obj|add:6}}  # 返回：给对象做加法的值
+
+8.（重要）
+   指定渲染html中的渲染内容：
+   例如，
+   Python中：
+   abc = '<a href='#'>跳转</a>'
+   return render(request,'index.html',{'obj':'abc'})
+
+   html中：
+   {{obj}}
+
+注意：本来返回给浏览器的html中的模版被abc替换了,而abc中的语言是html，浏览器应该进行渲染，但是浏览器不会进行渲染！
+
+   因为这里涉及到了浏览器无法判断是否需要渲染的问题，若要浏览器渲染则需要在html中引入：
+   {% autoescape off %}
+        {{obj}}
+   {% endautoescape %}
+
+
+9.（重要）自定义simple_tag    （单开一个文本来详细阐述）
+   作用：
+   a.在app中创建templatags模块（必须的）
+   b.创建任意 .py 文件，例如， add100.py
+
+
+
+
+10.{% csrf_token %}
+  作用：加在表单input标签最后面，用户在提交数据时，同时生成csrf_token标签，用于防止垮站攻击验证
+
+11.<form action='{% url'bieming' %}'> </form>
+   作用：引用路由配置的地址
+
+12.{% verbatim %}
+        {{hello}}
+   {% endverbatim %}
+   作用：禁止渲染，即禁止render,类似于上面的8
+
+
+
+
+
+
+html中：<h1>当前显示 {{abc}} </h1>
+Python中：render(request,'index.html',{'abc':'hello'})
+
+模版templates：就是html中在 {{ }};
+context:就是render中在{'abc':'hello'};
+
+可以把templates，context实例化然后打印：
+from Django.template import Template,Context
+
+t = Template('当前显示 {{zbc}}')
+print t.render(Context({'abc':'hello'}))
+返回：当前显示 hello
+
+用同一个模版渲染多个Context，进行一次模版创建然后多次调用render():
+t = Template('当前显示 {{abc}}')
+for abc in ('hello','sure','xxx')
+    print t.render(Context({'abc':abc}))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

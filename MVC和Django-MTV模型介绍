@@ -1,0 +1,91 @@
+
+
+MTC模式:
+就是把WEB应用分为模型(M)，控制器（C），视图（V）三层，3者以一种插件式、松耦合的方式连接。
+几乎所有的WEB框架都是基于MTC模型。
+
+
+模型（Model）：负责业务对象与数据库对象（ORM）；
+
+视图（View）：负责与用户的交互（页面）；  # 存储HTML
+
+控制器(Controller)：接收用户输入调用模型和视图完成用户的请求；
+
+流程：
+1.Controller接收request,经过处理形成View,View通过Response回返给客户;
+2.Controller给Model发出demand获取数据data;
+3.Controller接收Model返回的data,经过处理形成View,View通过Response回返给客户。
+
+
+
+Django-MTV模式：
+MTV模式是Djongo独有的模型，本质上与MTC没有差别。
+
+模型（Model）：负责业务对象与数据库对象（ORM）；   # 跟MTC的M一样，负责与数据库交互
+
+模版(Template)：负责如何把页面展示给客户；        # 跟View一样，存储HTML
+
+视图（View）：负责业务逻辑，调用Model和Template  # 相当于Controller
+
+重点：在Djongo中URL控制器是已经写好了并隐藏,不需要重新写,直接用即可。
+
+我们只需要写：
+1.根据URL匹配对应的函数名；
+2.View视图，即函数的内容；
+3.Template模版，即HTML文件，Djongo中有一大批现有模版语言用作字符串拼接；
+4.Models，即如何与数据库交互。
+
+
+Python命令行操作（在终端Terminial）
+
+1.创建Django：
+  django-admin.py startproject Django名   # 文件中mysite就是django框架名字
+
+2.创建应用application（APP应用）语句：
+  (1)cd django名  # 先进入框架文件，再创建APP
+  (2)python manage.py startapp blog  # blog就是django框架下的一个应用名字
+
+3.命令行启动Django服务器文件:
+  python manage.py runsever 127.0.0.1:8080  # 后面自己设置IP/端口
+
+4.命令行对接数据库：
+  model.py
+
+5.使用模版：
+  render(request,'xxx.html')   # 第一个参数一定加上request,因为服务端是通过客户request的路径来返回信息
+
+
+
+setting(配置)代码重要参数介绍：
+
+1.TEMPLATES
+   因为我们所有的html会放在templates中，所以Django在setting的代码中就通过 'DIRS':[os.path.join(BASE_DIR),'templates ']进行配置，
+进行了templates绝对路径的拼接。
+
+2.STATICFILES_DIRS  (static：静态)
+   STATICFILES_DIRS=（os.path.join(BASE_DIR,'STATICS')
+   ）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

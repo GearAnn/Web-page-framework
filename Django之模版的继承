@@ -1,0 +1,55 @@
+
+
+模版的继承
+    {% block content %} {% endblock %}    # content是自定义名字
+作用：
+ 页面框架和布局等部分和不同的页面内容之间，存在大量相同的布局，不同的页面只是更改了其中的内容，但是框架布局却是相同的。
+ {% block %}就是为了避免不同html文件之间，存在相同的页面布局代码，让不同的html文件只写各自的内容文本。
+
+用法：
+(1)新建一个html文档，即html模版文件，用于专门存放布局的代码，命名为'base.html',把所有公共的部分（例如，布局代码）全放进去；
+
+(2)'base.html'中只留下公共部分，然后在非公共的部分写下 {% block content %} {% endblock %}来填充；
+
+(3)其他不同内容的html，只留下各自的内容代码（省去所以的header头部标签和<!DOCTYPE html>模式标签），然后在最开头引入模版文件：
+    {% extends'base.html' %} ,表示在所以文件内容渲染之前，先加载模版文件；
+
+(4)不同的html开头加载好了模版文件，然后写下{% block content %} {% endblock %} ，把html中的具体内容放在其中：
+    语法：{% extends'base.html' %}
+         {% block content %}
+            具体内容
+         {% endblock %}
+
+注意:
+访问父模版中块的内容，使用{{ block.super }},其会表现出父模块中的内容，若要在模块中添加内容，这就变得十分有用了。
+用法：base.html中的盒子{% block %}是可以添加内容的, 在其他html继承base模版中，添加{{ block.super }}就可以显示出base版本中盒子的内容了；
+
+模板base.html中：  {% block content %}
+                    yyyyyyy
+                  {% endblock %}
+
+继承base.html模版的子html中：
+                  {% block content %}
+                    {{ block.super }}
+                  {% endblock %}
+
+这样在子html中得到的页面，就是显示了父模版中的'yyyyyy'
+
+
+总结：即使通过{% block content %} {% endblock %} 来继承了模版html的内容。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

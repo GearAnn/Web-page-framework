@@ -1,0 +1,39 @@
+
+
+(必须会)
+自定义simple_tag
+
+作用:就是在html中导入python文件（模块），这样就可以直接在html中使用python编写的函数。
+
+方法：
+(1)
+# 创建 my_tag.py 文件
+from django import template
+from django.utils.safestring import mark_safe
+
+register = template.Library()   # register是固定变量名，不可改变
+
+@register.simple_tag    # 装饰器
+def my_add100(v1):
+    return v1 + 100     # 参数v1+100
+
+(2)
+在html文件最前面(<!DOCTYPE html>之前)加上 {% load my_tag %}
+
+(3)
+在html中就可以直接使用 my_add100 ,这样html文件就知道在 my_tag.py文件中去拿 my_add100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

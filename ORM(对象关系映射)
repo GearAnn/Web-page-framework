@@ -1,0 +1,73 @@
+from django.db import models
+
+# Create your models here.
+
+
+# 创建一个类，就是创建表单，然后定义了一些字段
+class UsrMessage(models.Model):
+    name = models.CharField(max_length=64, null=True, blank=True, default='', verbose_name='用户名' )
+    # models.CharField 创建字段；
+    # null=True   为空的时候用null填充；
+    # blank=True  可以为空；
+    # default=''  默认值为空；
+    # verbose_name  给字段做注释，这样在方便后台管理字段
+    email = models.EmailField(verbose_name='邮箱')     # mmodels.EmailField  创建游戏地址
+    address = models.CharField(max_length=64, verbose_name='联系地址')
+    message = models.CharField(max_length=64, verbose_name='信息')
+    # publisher = models.ForeignKey('Publish')  # 一对多关系
+
+    class Meta:   # Meta就是给整个表单一个整体概述
+        verbose_name = '用户留言信息'             # 给表单一个名字
+        verbose_name_plural = verbose_name
+        # ordering = 'name'  # 表示根据name排序
+#FIXME 注意：如果你想把这个models链接数据库上，就必须在 settings.py 的 INSTALLED_APPS 中添加 apps(应用文件名)
+
+
+
+
+"""
+class Person():
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):  # __str__方法会帮助我们打印类对象的具体内容，而不是返回类对象的类存地址
+        return self.name  # 这里 return 什么内容，是根据表单的字段和需求来自定
+
+obj = Person('alex')
+print(obj)
+"""
+#FIXME 注意：
+# 在python中我们创建了一个类，然后赋予这个类一个对象，然后再打印类的对象的时候，打印结果是‘内存地址’。这并不是我们想要的结果；
+# 因为我们希望看到的是表单里面的数据，但是表单本质是python中的类，所以我们引进了 'def __str__(self)'，它会帮我们返回对象的具体内容。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
